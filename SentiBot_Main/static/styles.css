@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/blackBG.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 5px;
+    color: #fff; /* White text color */
+}
+
+#senti-bot-title {
+    font-size: 35px; /* Larger font size */
+    font-weight: bold;
+    color: #fff; /* White text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+    margin-bottom: 20px;
+    letter-spacing: 2px; /* Increased letter spacing for a stylish look */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Custom font */
+    margin-top: 50px; /* Adjust the margin-top to center the title vertically */
+}
+
+#senti-bot-title span {
+    display: inline-block;
+    white-space: nowrap; /* Ensure the text stays in one line */
+    opacity: 0; /* Initially invisible */
+}
+
+#senti-bot-title span:first-child {
+    animation: fadein-bot 2s forwards; /* Fade in animation for SentiBot */
+}
+
+#senti-bot-title span:last-child {
+    animation: fadein-friend 2s forwards 1.5s; /* Fade in animation for -Your Virtual Friend after 1.5s delay */
+}
+
+@keyframes fadein-bot {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein-friend {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.left-section {
+    width: 45%;
+    text-align: left;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    overflow-y: auto; /* Add this line to enable vertical scrolling */
+    max-height: calc(100vh - 120px); /* Adjust max-height to fit within viewport height */
+}
+
+.right-section {
+    width: 45%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#gifContainer {
+    display: none;
+    position: absolute;
+    top: 52%;
+    left: 32%;
+    transform: translate(-50%, -50%);
+}
+
+#gifContainer img {
+    max-width: 150%;
+    max-height: 150%;
+}
+
+#botContainer {
+    /* margin: 20px auto; Add margin at the top and bottom, and auto for horizontal centering */
+    width: 200px; /* Decreased width */
+    height: 200px; /* Decreased height */
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#botContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.containHori {
+    display: flex;
+    justify-content: center;
+    gap: 75px;
+}
+
+.video-container {
+    /* margin: 20px auto; Add margin at the top and bottom, and auto for horizontal centering */
+    width: 200px; /* Decreased width */
+    height: 200px; /* Decreased height */
+    text-align: center;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative; /* Ensure relative positioning for absolute positioning of GIF container */
+    margin-bottom: 20px;
+    background-color: #e8dcb4;
+}
+
+#videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.manual-text-input {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    resize: vertical;
+    margin-top: 10px;
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea:focus {
+    border-color: #007bff;
+}
