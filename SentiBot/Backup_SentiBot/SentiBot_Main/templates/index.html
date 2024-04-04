@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Recognition</title>
+    <link rel="stylesheet" href="static/index.css"> <!-- Corrected CSS file path -->
+</head>
+<body>
+    <h1>SentiBot-AudioAnalysis</h1>
+
+    <div class="container">
+        <!-- Left Section: Conversations -->
+        <div class="left-section">
+            <div class="conversations"></div>
+        </div>
+
+        <!-- Right Section: Video Stream and Manual Text Input -->
+        <div class="right-section">
+            <!-- Video Stream -->
+            <div class="video-container">
+                <video id="videoElement" autoplay muted></video>
+            </div>
+
+            <!-- Manual Text Input -->
+            <div class="manual-text-input">
+                <textarea id="textInput" placeholder="Type your text here..." rows="4" cols="30"></textarea>
+            </div>
+
+            <!-- Start/Stop Button -->
+            <div class="record-buttons">
+                <button id="recordButton" onclick="startRecording()">Start Recording</button>
+                <button id="stopButton" style="display:none;" onclick="stopRecording()">Stop Recording</button>
+            </div>
+
+            <!-- Process Text Button -->
+            <div class="process-text-button">
+                <button id="processButton" onclick="processText()">Process Text</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let recognition;
+        let isRecording = false;
+        let conversationCount = 0;
+
+        function startRecording() {
+            if (isRecording) return;
+            isRecording = true;
+
+            const recordButton = document.getElementById('recordButton');
+            const stopButton = document.getElementById('stopButton');
+            recordButton.style.display = 'none';
+            stopButton.style.display = 'inline-block';
+
+            const conversationsDiv = document.querySelector('.conversations');
+            conversationCount++;
+
+            const newTable = createNewConversation(conversationCount);
+            const newRow = newTable.insertRow();
+            const newCell = newRow.insertCell();
+            newCell.className = 'conversation-text';
+
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                .then(function(stream) {
+                    const videoElement = document.getElementById('videoElement');
+                    videoElement.srcObject = stream;
+
+                    stream.getAudioTracks().forEach(track => {
+                        track.enabled = false;
+                    });
+
+                    recognition = new webkitSpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+
+                    recognition.onresult = function(event) {
+                        const transcript = Array.from(event.results)
+                            .map(result => result[0])
+                            .map(result => result.transcript)
+                            .join(' ');
+
+                        newCell.textContent = transcript;
+
+                        if (newCell.textContent.length > 5000) {
+                            newCell.textContent = newCell.textContent.substring(newCell.textContent.length - 5000);
+                        }
+                    };
+
+                    recognition.start();
+                })
+                .catch(function(err) {
+                    console.error('Error accessing video stream:', err);
+                });
+        }
+
+        function stopRecording() {
+            const recordButton = document.getElementById('recordButton');
+            const stopButton = document.getElementById('stopButton');
+            stopButton.disabled = true;
+            
+            setTimeout(() => {
+                stopButton.disabled = false;
+            }, 1000);
+
+            if (!isRecording) return;
+            isRecording = false;
+
+            recordButton.style.display = 'inline-block';
+            stopButton.style.display = 'none';
+
+            // Stop the speech recognition
+            recognition.stop();
+
+            // Stop the video stream
+            const videoElement = document.getElementById('videoElement');
+            const stream = videoElement.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+
+            // Get the conversation text
+            const conversationText = document.querySelector('.conversation-text:last-child').textContent;
+
+            // Perform sentiment analysis prediction and display predicted mood
+            fetch('/process_audio_video', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text_data: conversationText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const predictedMood = data.predicted_mood;
+                    const predictedMoodElement = document.createElement('div');
+                    predictedMoodElement.textContent = `Predicted Mood for Conversation${conversationCount}: ${predictedMood}`;
+                    const conversationsDiv = document.querySelector('.conversations');
+                    conversationsDiv.appendChild(predictedMoodElement);
+                }
+            })
+            .catch(error => {
+                console.error('Error processing text:', error);
+            });
+        }
+
+
+        function createNewConversation(conversationNumber) {
+            const conversationsDiv = document.querySelector('.conversations');
+            const newTable = document.createElement('table');
+            const caption = document.createElement('caption');
+            caption.textContent = `Conversation${conversationNumber}`;
+            newTable.appendChild(caption);
+            conversationsDiv.appendChild(newTable);
+            return newTable;
+        }
+
+        function processText() {
+            const textInput = document.getElementById('textInput').value;
+            const conversationsDiv = document.querySelector('.conversations');
+            
+            // Create a new conversation cell
+            const newTable = createNewConversation(++conversationCount);
+            const newRow = newTable.insertRow();
+            const newCell = newRow.insertCell();
+            newCell.className = 'conversation-text';
+            
+            // Set the content of the new conversation cell to the text input value
+            newCell.textContent = textInput;
+
+            // Scroll to the bottom of the conversations div
+            conversationsDiv.scrollTop = conversationsDiv.scrollHeight;
+
+            // Clear the text input field
+            document.getElementById('textInput').value = '';
+
+            // Stop recording if it's ongoing
+            stopRecording();
+
+            // Perform sentiment analysis prediction and display predicted mood
+            // Call the backend endpoint here to process the text input and get the predicted mood
+            fetch('/process_audio_video', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text_data: textInput
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const predictedMood = data.predicted_mood;
+                    const predictedMoodElement = document.createElement('div');
+                    predictedMoodElement.textContent = `Predicted Mood for Conversation${conversationCount}: ${predictedMood}`;
+                    conversationsDiv.appendChild(predictedMoodElement);
+                }
+            })
+            .catch(error => {
+                console.error('Error processing text:', error);
+            });
+    }
+    </script>
+</body>
+</html>

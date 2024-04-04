@@ -10,7 +10,6 @@ def index():
 @app.route('/process_audio_video', methods=['POST'])
 def process_audio_video():
     if request.method == 'POST':
-        # Receive data from the client
         data = request.json
         
         # Extract text data from the request

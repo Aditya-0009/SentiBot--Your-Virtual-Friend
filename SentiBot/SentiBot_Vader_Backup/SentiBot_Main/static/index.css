@@ -1,0 +1,165 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../static/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #fff; /* White text color */
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.left-section {
+    width: 45%;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.right-section {
+    width: 45%;
+    text-align: center;
+}
+
+#senti-bot-title {
+    font-size: 35px; /* Larger font size */
+    font-weight: bold;
+    color: #fff; /* White text color */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
+    margin-bottom: 20px;
+    letter-spacing: 2px; /* Increased letter spacing for a stylish look */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Custom font */
+    margin-top: 50px; /* Adjust the margin-top to center the title vertically */
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff; /* Blue button color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+#gifContainer {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+#gifContainer img {
+    max-width: 170%;
+    max-height: 170%;
+}
+
+
+
+.video-container {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative; /* Ensure relative positioning for absolute positioning of GIF container */
+}
+
+
+#videoElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.manual-text-input {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px;
+    resize: vertical;
+    margin-top: 10px;
+    transition: border-color 0.3s ease-in-out;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea:focus {
+    border-color: #007bff;
+}
+
+.conversations {
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+.conversation-box {
+    background-color: #edf2f7; /* Light blue background */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Increase border-radius for a rounded appearance */
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    transition: transform 0.3s ease-in-out;
+}
+
+.conversation-box:hover {
+    transform: scale(1.05);
+}
+
+.conversation-header {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #007bff; /* Blue text color */
+    position: relative;
+}
+
+.conversation-header::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+}
+
+.input-text,
+.predicted-mood {
+    margin-top: 20px;
+    color: #007bff; /* Blue text color */
+}
+
+.separator-line {
+    width: 100%;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}

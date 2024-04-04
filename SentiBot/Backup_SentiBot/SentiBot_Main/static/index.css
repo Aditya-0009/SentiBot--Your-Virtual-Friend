@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.left-section {
+    width: 45%;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.right-section {
+    width: 45%;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.video-container {
+    margin: 0 auto;
+    width: 80%; /* Adjust the width as needed */
+    text-align: center;
+    margin-top: 20px;
+}
+
+#videoElement {
+    width: 100%;
+    border: 2px solid #000;
+}
+
+.manual-text-input {
+    margin-top: 20px;
+}
+
+textarea {
+    width: 80%;
+    height: 100px; /* Adjust the height as needed */
+    resize: vertical;
+    margin-top: 10px;
+}
+
+.conversations {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.conversation-box {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    padding: 10px;
+    max-width: 640px; /* Adjust the width as needed */
+    margin-left: auto;
+    margin-right: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 200px; /* Limit conversation box height */
+}
+
+.conversation-box p {
+    margin: 0;
+    padding: 5px 0;
+    white-space: pre-wrap; /* Preserve line breaks */
+}
