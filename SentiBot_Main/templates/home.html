@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentiBot Home</title>
+  <link rel="website icon" type="jpg" href="static\SentiBot_Logo.png">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#" class="btn-link">About</a></li>
+        <li><a href="#" class="btn-link">Contact Us</a></li>
+        <li><a href="#" class="btn-link">Services</a></li>
+        <li><a href="{{ url_for('login') }}" class="btn-link">Log Out</a></li>
+        <!-- Add more navigation items as needed -->
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <h1>Welcome to SentiBot's World</h1>
+    <button class="Btn" onclick="window.location.href='/index'" data-text="SentiBot&#10;Text Sentiment Analysis">Text Analysis</button>
+    <button class="Btn" onclick="window.location.href='/video'" data-text="SentiBot&#10;Video Sentiment Analysis">Video Analysis</button>
+    <button class="Btn" onclick="window.location.href='/chat'" data-text="Chat With SentiBot">Chat With SentiBot</button>
+    <!-- Add more content here -->
+  </section>
+</body>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    min-height: 100vh;
+    background-image: url("../static/bg.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+  }
+  nav ul li {
+    margin-right: 20px;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover {
+    color: #f0f0f0;
+  }
+  .btn-link {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+  }
+  .btn-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  .Btn {
+    width: 200px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, #77530a, #ffd277, #77530a, #77530a, #ffd277, #77530a);
+    background-size: 250%;
+    background-position: left;
+    color: #ffd277;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: 1s;
+    overflow: hidden;
+    margin-top: 20px; /* Added margin to separate buttons */
+  }
+
+  .Btn::before {
+    position: absolute;
+    content: attr(data-text);
+    color: #ffd277;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 97%;
+    height: 90%;
+    border-radius: 8px;
+    transition-duration: 1s;
+    background-color: rgba(0, 0, 0, 0.842);
+    background-size: 200%;
+    white-space: pre-line; /* Adjusted to properly interpret newline characters */
+  }
+
+
+  .Btn:hover {
+    background-position: right;
+    transition-duration: 1s;
+  }
+
+  .Btn:hover::before {
+    background-position: right;
+    transition-duration: 1s;
+  }
+
+  .Btn:active {
+    transform: scale(0.95);
+  }
+
+  section {
+    padding: 20px ;
+    text-align: center;
+  }
+</style>
+</html>

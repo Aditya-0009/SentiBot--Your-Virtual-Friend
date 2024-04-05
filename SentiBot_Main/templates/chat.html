@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentiBot Chat</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("../static/bg.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    section {
+      text-align: center;
+      padding: 20px;
+    }
+    .chat-container {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      width: 300px; /* Set width of the chat container */
+      margin: 0 auto; /* Center the chat container horizontally */
+    }
+    .chat-message {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .user-message {
+      background-color: #28a745;
+      align-self: flex-start;
+    }
+    .bot-message {
+      background-color: #ffc107;
+      align-self: flex-end;
+    }
+    #chat-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    #message {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-right: 10px;
+    }
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SentiBot Chat</h1>
+  </header>
+
+  <section>
+    <div class="chat-container">
+      <!-- Chat messages will be displayed here -->
+    </div>
+    <form id="chat-form">
+      <input type="text" id="message" placeholder="Type your message...">
+      <button type="submit">Send</button>
+    </form>
+  </section>
+</body>
+</html>

@@ -1,11 +1,37 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        # Handle the login form submission here
+        # You can process the form data and perform any necessary actions
+        return redirect(url_for('home'))
+    else:
+        return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
+
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+    return render_template('home.html')
+
+@app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/video')
+def video():
+    return render_template('video.html')
+
+@app.route('/chat')
+def chat():
+    return render_template('chat.html')
+
 
 @app.route('/process_audio_video', methods=['POST'])
 def process_audio_video():
