@@ -6,13 +6,15 @@
   <title>SentiBot Signup</title>
   <link rel="website icon" type="jpg" href="static\SentiBot_Logo.png">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <img src="../static/bluewhiteleaf.png">
     <div class="wrapper">
       <form action="/home" method="post"> <!-- Update the action attribute to "/home" -->
-        <h1>SentiBot Sign-Up</h1>
+        <h1>SentiBot SignUp</h1>
         <div class="input-box">
           <input type="text" placeholder="Name" name="name" required>
           <i class='bx bxs-user'></i>
@@ -45,6 +47,7 @@
     font-family: "Poppins", sans-serif;
   }
   body {
+    font-family: 'Muli', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +65,7 @@
     max-width: 1200px; /* Limit maximum width */
   }
   .wrapper {
-    width: 40%; /* Adjust login box width */
+    width: 50%; /* Adjust login box width */
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
     backdrop-filter: blur(9px);
@@ -76,6 +79,7 @@
     margin-left: -14%; /* Adjusted left margin */
   }
   .wrapper h1 {
+    font-family: 'Marcellus', serif;
     font-size: 36px;
     text-align: center;
   }

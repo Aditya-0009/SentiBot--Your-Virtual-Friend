@@ -157,7 +157,6 @@ textarea:focus {
     border-color: #007bff;
 }
 
-/* Style for the home link */
 .home-link {
     position: absolute;
     top: 20px;
@@ -166,6 +165,6 @@ textarea:focus {
 }
 
 .home-icon {
-    width: 40px; /* Adjust icon size as needed */
-    height: 40px;
+    width: 100px; /* Increase icon size */
+    height: 100px;
 }
