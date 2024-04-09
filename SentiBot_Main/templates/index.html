@@ -61,7 +61,7 @@
             <!-- Manual Text Input -->
             <div class="manual-text-input">
                 <hr class="separator-line"> <!-- Separator line -->
-                <textarea id="textInput" placeholder="Type your text here..." rows="4" cols="30"></textarea>
+                <textarea id="textInput" placeholder="Type your text here..." rows="4" cols="30" onkeydown="handleKeyPress(event)"></textarea>
             </div>
 
             <!-- Process Text Button -->
@@ -84,6 +84,12 @@
             document.getElementById('videoElement').style.display = 'none';
             document.getElementById('gifContainer').style.display = 'block';
         };
+
+        function speakPredictedMoodMessage(predictedMood) {
+            const message = `Your mood seems to be ${predictedMood}.`;
+            const utterance = new SpeechSynthesisUtterance(message);
+            speechSynthesis.speak(utterance);
+        }
 
 
         function startRecording() {
@@ -202,7 +208,7 @@
                     const conversationsDiv = document.querySelector('.conversations');
                     const newMood = document.createElement('div');
                     newMood.classList.add('predicted-mood');
-                    newMood.innerHTML = `<hr><p>Predicted Mood: ${predictedMood}</p>`;
+                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood}</span>.</p>`;
                     const lastConversation = conversationsDiv.lastChild;
                     lastConversation.querySelector('.conversation-content').appendChild(newMood);
 
@@ -222,6 +228,7 @@
                             // Show the default bot GIF if mood is not recognized
                             botGif.src = 'static/OnStart_bot.gif';
                     }
+                    speakPredictedMoodMessage(predictedMood);
                 }
             })
             .catch(error => {
@@ -261,12 +268,14 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
+                    // Inside processText() function
                     const predictedMood = data.predicted_mood.toLowerCase();
                     const newMood = document.createElement('div');
                     newMood.classList.add('predicted-mood');
-                    newMood.innerHTML = `<hr><p>Predicted Mood: ${predictedMood}</p>`;
+                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood.charAt(0).toUpperCase() + predictedMood.slice(1)}</span>.</p>`;
                     const lastConversation = conversationsDiv.lastChild;
                     lastConversation.querySelector('.conversation-content').appendChild(newMood);
+
 
                     // Show the corresponding bot GIF based on the predicted mood
                     const botGif = document.getElementById('botGif');
@@ -284,11 +293,17 @@
                             // Show the default bot GIF if mood is not recognized
                             botGif.src = 'static/OnStart_bot.gif';
                     }
+                    speakPredictedMoodMessage(predictedMood);
                 }
             })
             .catch(error => {
                 console.error('Error processing text:', error);
             });
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                processText();
+            }
         }
 
 

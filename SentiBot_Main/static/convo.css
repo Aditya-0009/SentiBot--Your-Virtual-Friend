@@ -47,12 +47,35 @@
     bottom: -10px;
     left: 0;
 }
+.logo {
+    width: 2.4em; /* Set the width relative to the font size */
+    height: auto; /* This will maintain the aspect ratio */
+    vertical-align: middle; /* Align the logo vertically with the text */
+}
+
 
 .input-text,
 .predicted-mood {
+    font-size: 20px;
+    color: #808080;
+    display: inline;
     margin-top: 20px;
-    color: #007bff; /* Blue text color */
 }
+/* Set the color for positive mood */
+.predicted-mood .predicted-mood-text[data-mood="positive"] {
+    color: green;
+}
+
+/* Set the color for negative mood */
+.predicted-mood .predicted-mood-text[data-mood="negative"] {
+    color: red;
+}
+
+/* Set the color for neutral mood */
+.predicted-mood .predicted-mood-text[data-mood="neutral"] {
+    color: black;
+}
+
 
 .separator-line {
     width: 100%;

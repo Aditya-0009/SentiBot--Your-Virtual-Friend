@@ -11,6 +11,24 @@ body,html{
         overflow: hidden;
     }
 }
+#senti-bot-title {
+    font-size: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+    letter-spacing: 1px;
+    opacity: 0;
+    animation: fadein 2s forwards;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 .chat{
 	margin-top: auto;
