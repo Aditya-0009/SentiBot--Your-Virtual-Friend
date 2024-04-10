@@ -24,6 +24,7 @@
       background: rgba(0, 0, 0, 0.7);
       padding: 20px;
     }
+    
     nav ul {
       list-style: none;
       display: flex;
@@ -122,9 +123,9 @@
   <header>
     <nav>
       <ul>
-        <li><a href="#" class="btn-link">About</a></li>
-        <li><a href="{{ url_for('contact') }}" class="btn-link">Contact Us</a></li>
-        <li><a href="{{ url_for('login') }}" class="btn-link">Log Out</a></li>
+        <li><a href="{{ url_for('about') }}" class="btn-link"><i class='bx bx-info-circle'></i> About</a></li>
+        <li><a href="{{ url_for('contact') }}" class="btn-link"><i class='bx bx-envelope'></i> Contact Us</a></li>
+        <li><a href="{{ url_for('login') }}" class="btn-link"><i class='bx bx-log-out'></i> Log Out</a></li>
         <!-- Add more navigation items as needed -->
       </ul>
     </nav>

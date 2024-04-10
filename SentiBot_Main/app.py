@@ -49,6 +49,10 @@ def contact():
 def chat_page():
     return render_template('chat.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route("/get", methods=["POST"])
 def chat():
     if request.method == "POST":
