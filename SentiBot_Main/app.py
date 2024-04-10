@@ -4,6 +4,10 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 import pyttsx3
 
+import requests
+from flask import redirect
+
+
 tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium", padding_side='left')
 model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium")
 
@@ -32,6 +36,10 @@ def index():
 def video():
     return render_template('video.html')
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 @app.route('/chat')
 def chat_page():
     return render_template('chat.html')
@@ -39,7 +47,7 @@ def chat_page():
 @app.route("/get", methods=["POST"])
 def chat():
     if request.method == "POST":
-        user_message = request.form["msg"]
+        user_message = request.form["msg"]      
         response_text = get_Chat_response(user_message)
         speak_response(response_text)
         return jsonify({'user_message': user_message, 'chatbot_response': response_text})
@@ -85,6 +93,7 @@ def predict_sentiment_vader(text):
         return 'Negative'
     else:
         return 'Neutral'
+
 
 if __name__ == '__main__':
     app.run(debug=True)
