@@ -16,16 +16,34 @@ h1 {
     color: #fff; /* White text color */
 }
 
+.logo-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: center; /* Center horizontally */
+    margin-top: 35px; /* Add margin to move the container down */
+}
+
+.logo {
+    width: 60px; /* Adjust the width of the logo */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add space between the logo and text */
+}
+
+
 #senti-bot-title {
     font-size: 35px; /* Larger font size */
     font-weight: bold;
     color: #fff; /* White text color */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better visibility */
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     letter-spacing: 2px; /* Increased letter spacing for a stylish look */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Custom font */
-    margin-top: 50px; /* Adjust the margin-top to center the title vertically */
+    font-family: 'Oswald', sans-serif; /* Custom font */
+    opacity: 1; /* Ensure text is visible */
+    animation: none; /* Remove animation */
+    margin-top: 4; /* Adjust margin-top as needed */
 }
+
+
 
 #senti-bot-title span {
     display: inline-block;
@@ -59,6 +77,7 @@ h1 {
     }
 }
 
+
 .container {
     display: flex;
     justify-content: space-around;
@@ -73,14 +92,29 @@ h1 {
     padding: 0 10px;
     margin-bottom: 20px;
     overflow-y: auto; /* Add this line to enable vertical scrolling */
-    max-height: calc(100vh - 120px); /* Adjust max-height to fit within viewport height */
+    max-height: 520px; /* Adjust max-height in pixels to fit inside the black transparent container */
+    margin-left: 100px;
+    padding-right: 10px; /* Add padding to accommodate scrollbar */
 }
+
+.left-section::-webkit-scrollbar {
+    display: none;
+  }
+
+
 
 .right-section {
     width: 45%;
     text-align: center;
     margin-bottom: 20px;
 }
+.separator-line {
+    width: 60%;
+    border-top: 1px solid #ccc;
+    margin: 0.5em 0; /* Margin relative to conversation-box */
+    margin-left: 20%;
+}
+
 
 #gifContainer {
     display: none;
@@ -154,7 +188,7 @@ textarea {
 }
 
 textarea:focus {
-    border-color: #007bff;
+    border-color: red;
 }
 
 .home-link {
@@ -167,4 +201,16 @@ textarea:focus {
 .home-link i {
     font-size: 24px; /* Adjust icon size */
     color: #ffffff; /* Icon color */
+}
+
+
+.overlay {
+    position: fixed;
+    top: 5%; /* Adjust the percentage value to move the overlay vertically */
+    left: 6%; /* Adjust the percentage value to move the overlay horizontally */
+    width: 90%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    z-index: -1; /* Make sure it appears behind other content */
+    border-radius: 20px; /* Adjust the value to control the roundness of corners */
 }

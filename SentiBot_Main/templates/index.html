@@ -9,24 +9,30 @@
     <link rel="stylesheet" href="static/styles.css"> <!-- Link to styles.css -->
     <link rel="stylesheet" href="static/buttons.css"> <!-- Link to updated buttons.css -->
     <link rel="stylesheet" href="static/convo.css"> <!-- Link to convo.css --> 
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet"> <!-- Added link to Oswald font -->
     
 </head>    
 <body>
+    <div class="overlay"></div> <!-- New overlay div -->
+
     <a href="home" class="home-link">
-        <i class='bx bx-home'></i> Home <!-- Use the Boxicons home icon -->
+        <i class='bx bx-home'></i> Home
     </a>    
     
-    <h1 id="senti-bot-title">
-        <span>SentiBot</span>
-        <span>-Your Virtual Friend</span>
-    </h1>
+    <div class="logo-container">
+        <img src="static\SentiBot_Logo.png" alt="SentiBot Logo" class="logo">
+        <h1 id="senti-bot-title">
+            <span>SentiBot</span>
+            <span>-Your Virtual Friend</span>
+        </h1>
+    </div>
 
     <div class="container">
         <!-- Left Section: Conversations -->
         <div class="left-section">
             <div class="conversations"></div>
-        </div>
-
+        </div> 
+ 
         <!-- Right Section: Video Stream and Manual Text Input -->
         <div class="right-section">
             <!-- Video Stream -->
@@ -208,7 +214,7 @@
                     const conversationsDiv = document.querySelector('.conversations');
                     const newMood = document.createElement('div');
                     newMood.classList.add('predicted-mood');
-                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood}</span>.</p>`;
+                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo-convo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood}</span>.</p>`;
                     const lastConversation = conversationsDiv.lastChild;
                     lastConversation.querySelector('.conversation-content').appendChild(newMood);
 
@@ -272,7 +278,7 @@
                     const predictedMood = data.predicted_mood.toLowerCase();
                     const newMood = document.createElement('div');
                     newMood.classList.add('predicted-mood');
-                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood.charAt(0).toUpperCase() + predictedMood.slice(1)}</span>.</p>`;
+                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo-convo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood.charAt(0).toUpperCase() + predictedMood.slice(1)}</span>.</p>`;
                     const lastConversation = conversationsDiv.lastChild;
                     lastConversation.querySelector('.conversation-content').appendChild(newMood);
 

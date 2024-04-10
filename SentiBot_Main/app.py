@@ -24,9 +24,14 @@ def login():
 def signup():
     return render_template('signup.html')
 
+from flask import session  # Import session
+
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-    return render_template('home.html')
+    # Retrieve username from session
+    username = session.get('username')
+    return render_template('home.html', username=username)  # Pass username to the template
+
 
 @app.route('/index')
 def index():
