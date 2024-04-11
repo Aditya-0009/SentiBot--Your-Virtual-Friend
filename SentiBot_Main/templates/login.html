@@ -8,13 +8,21 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> <!-- Added link to Lato font -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet"> <!-- Added link to Oswald font -->
 
   <body>
     <div class="container">
-      <img src="../static/bluewhiteleaf.png">
+      <div class="image-container">
+        <img src="../static/bluewhiteleaf.png" class="image">
+        <a href="{{ url_for('contact') }}" class="contact-button">
+          Contact Us
+        </a>
+      </div>
       <div class="wrapper">
         <form action="{{ url_for('login') }}" method="POST">
-          <h1>SentiBot Login</h1>
+          <h1>Login</h1>
           <div class="input-box">
             <input type="text" placeholder="Username" name="username" required>
             <i class='bx bxs-user'></i>
@@ -53,6 +61,43 @@
       background-position: center;
       overflow: hidden;
     }
+
+    .image-container {
+      position: relative;
+      width: 40%; /* Adjust the width of the image container */
+      margin-right: 5%; /* Adjust the margin as needed */
+      margin-left:-5%
+    }
+
+    .image {
+      width: 90%; /* Adjust the width of the image */
+      height: auto; /* Maintain aspect ratio */
+      border-radius: 15px;
+      /* Add any additional styling for the image */
+    }
+
+    /* Style for contact button */
+    .contact-button {
+      position: absolute;
+      bottom: 10px; /* Adjust vertical position as needed */
+      left: 31.5%;
+      transform: translateX(-50%);
+      display: inline-block;
+      width: auto; /* Adjust width automatically based on content */
+      height: 50px;
+      line-height: 50px; /* Adjust line height to vertically center the text */
+      text-align: center;
+      color: #355973; /* Set font color to black */
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all .2s ease-in-out;
+    }
+
+    .contact-button:hover {
+      color: #355973;
+    }
+
+
     .container {
       display: flex;
       align-items: center;
