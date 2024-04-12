@@ -5,7 +5,6 @@
     flex-direction: column-reverse;
     
 }
-
 .conversation-box {
     background-color: #edf2f7; /* Light blue background */
     border: 1px solid #ccc;
@@ -17,7 +16,6 @@
     animation: slideIn 0.5s; /* Apply slide-in animation */
     width: 70%; /* Reduce the width of the conversation box */
 }
-
 
 @keyframes slideIn {
     0% {
