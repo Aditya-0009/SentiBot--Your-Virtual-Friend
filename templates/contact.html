@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/jpg" href="static\SentiBot_Logo.png"> <!-- Corrected the rel attribute -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"> <!-- Fixed link tag syntax -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> <!-- Added link to Lato font -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet"> <!-- Added link to Oswald font -->
+  
+  <title>SentiBot Support</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      padding-bottom: 100px;
+      font-family: 'Lato', sans-serif;
+      background-image: url("../static/bg.jpg"); /* Add the background image property */
+      background-size: cover; /* Adjust background size as needed */
+      background-position: center; /* Adjust background position as needed */
+    }
+    
+    #contact {
+      width: 100%;
+      height: 100%;
+    }
+
+    .home-link {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 9999;
+        color: #ffffff; /* Icon color */
+        font-size: 20px; /* Adjust icon size */
+    }
+
+    .home-link i {
+        font-size: 24px; /* Adjust icon size */
+        color: #ffffff; /* Icon color */
+    }
+
+    .logo {
+      height: 90px; /* Adjust the height of the logo as needed */
+      margin-right: 10px; /* Add some spacing between the logo and the text */
+      position: relative;
+      top: 15px; /* Adjust the value to move it down */
+      left: -5px; /* Adjust the value to move it left */
+    }
+
+
+    .section-header {
+      text-align: center;
+      margin: 0 auto;
+      padding: 40px 0;
+      font: 300 60px 'Oswald', sans-serif;
+      color: #fff;
+      letter-spacing: 2px;
+      word-spacing: 9px;
+      position: relative;
+      top: -20px; /* Adjust the value to move it upwards */
+    }
+
+    .contact-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      max-width: 1200px; /* Increased max-width to add space between left and right */
+    }
+    .contact-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+      max-width: 950px;
+      margin: 0 auto; /* Center horizontally */
+      transform: translateY(60px); /* Move container downwards by 50 pixels */
+    }
+
+
+    /* Left contact page */
+    .form-horizontal {
+      max-width: 400px;
+      font-family: 'Lato';
+      font-weight: 400;
+      margin: 0 auto; /* Center the form */
+    }
+
+    .form-group {
+      margin-bottom: 15px; /* Adjust margin between form fields */
+    }
+
+    .form-control,
+    textarea {
+      width: 100%; /* Make input fields occupy full width */
+      background-color: transparent; /* Set background color to transparent */
+      color: #fff;
+      border: 1px solid #fff; /* Add border */
+      border-radius: 5px; /* Add border radius */
+      padding: 10px; /* Add padding */
+      margin-top: 5px; /* Adjust margin */
+    }
+
+    .form-control:focus,
+    textarea:focus {
+      outline: none; /* Remove default focus outline */
+    }
+
+    .send-button {
+      margin-top: 15px;
+      height: 34px;
+      width: 400px;
+      overflow: hidden;
+      transition: all .2s ease-in-out;
+      background-color: black; /* Change button background color to blue */
+      border: none; /* Remove border */
+      border-radius: 5px; /* Add border radius */
+      padding: 10px; /* Add padding */
+      color: #fff; /* Change text color to white */
+      font-weight: bold; /* Add font weight */
+      cursor: pointer;
+    }
+
+    .send-button:hover {
+    background-color: white; /* Change button background color to white on hover */
+    color: black; /* Change text color to black on hover */
+    }
+    .alt-send-button {
+      width: 400px;
+      height: 34px;
+      transition: all .2s ease-in-out;
+    }
+
+    .send-text {
+    display: block;
+    margin-top: 10px;
+    font: 700 12px 'Lato', sans-serif;
+    letter-spacing: 2px;
+    color: black; /* Set initial text color */
+    }
+
+    .alt-send-button:hover {
+      transform: translate3d(0px, -29px, 0px);
+    }
+
+    /* Begin Right Contact Page */
+    .direct-contact-container {
+      max-width: 400px;
+      margin-left: 20px; /* Add margin to the left */
+      margin-right: 20px; /* Add margin to the right */
+    }
+
+    /* Location, Phone, Email Section */
+    .contact-list {
+      list-style-type: none;
+      margin-left: -30px;
+      padding-right: 20px;
+    }
+
+    .list-item {
+      line-height: 4;
+      color: #aaa;
+    }
+
+    .contact-text {
+      font: 300 18px 'Lato', sans-serif;
+      letter-spacing: 1.9px;
+      color: #bbb;
+    }
+
+    .place, .phone, .gmail {
+      margin-left: 20px; /* Adjust margin for spacing */
+    }
+
+    .contact-text a {
+      color: #bbb;
+      text-decoration: none;
+      transition-duration: 0.2s;
+    }
+
+    .contact-text a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Social Media Icons */
+    .contact-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    }
+
+    .social-media-list {
+      position: relative;
+      font-size: 22px;
+      text-align: center;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .social-media-list li a {
+      color: #fff;
+    }
+
+    .social-media-list li {
+      position: relative; 
+      display: inline-block;
+      height: 60px;
+      width: 60px;
+      margin: 10px 3px;
+      line-height: 60px;
+      border-radius: 50%;
+      color: #fff;
+      background-color: rgb(27,27,27);
+      cursor: pointer; 
+      transition: all .2s ease-in-out;
+    }
+
+    .social-media-list li:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 0 1px #fff;
+      transition: all .2s ease-in-out;
+    }
+
+    .social-media-list li:hover {
+      background-color: #fff; 
+    }
+
+    .social-media-list li:hover:after {
+      opacity: 1;  
+      transform: scale(1.12);
+      transition-timing-function: cubic-bezier(0.37,0.74,0.15,1.65);
+    }
+
+    .social-media-list li:hover a {
+      color: #000;
+    }
+
+    .copyright {
+      font: 200 14px 'Oswald', sans-serif;
+      color: #555;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    hr {
+      border-color: rgba(255,255,255,.6);
+    }
+
+    /* Begin Media Queries*/
+    @media screen and (max-width: 850px) {
+      .contact-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        max-width: 840px;
+      }
+
+      /* Left contact page */
+      .form-horizontal {
+        max-width: 400px;
+        font-family: 'Lato';
+        font-weight: 400;
+        margin-right: 20px; /* Add margin to the right */
+      }
+
+      /* Right contact page */
+      .direct-contact-container {
+        max-width: 400px;
+        margin-left: 20px; /* Add margin to the left */
+      }
+
+      .social-media-list li {
+        height: 60px;
+        width: 60px;
+        line-height: 60px;
+      }
+      .social-media-list li:after {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+      }
+    }
+
+    @media screen and (max-width: 569px) {
+      .direct-contact-container, .form-wrapper {
+        float: none;
+        margin: 0 auto;
+      }  
+      .form-control, textarea {
+        margin: 0 auto;
+      }
+      .name, .email, textarea {
+        width: 280px;
+      } 
+      .direct-contact-container {
+        margin-top: 60px;
+        max-width: 280px;
+      }  
+      .social-media-list {
+        left: 0;
+      }
+      .social-media-list li {
+        height: 55px;
+        width: 55px;
+        line-height: 55px;
+        font-size: 2rem;
+      }
+      .social-media-list li:after {
+        width: 55px;
+        height: 55px;
+        line-height: 55px;
+      }
+    }
+
+    @media screen and (max-width: 410px) {
+      .send-button {
+        width: 99%;
+      }
+    }
+  </style>
+</head>
+<body>
+    <a href="home" class="home-link">
+        <i class='bx bx-home'></i> <!-- Use the Boxicons home icon -->
+      </a>
+      
+      <section id="contact">
+        <div class="contact-container">
+            <h1 class="section-header">
+                <img src="static\SentiBot_Logo.png" alt="SentiBot Logo" class="logo"> Contact SentiBot Support
+            </h1>
+
+            <div class="contact-wrapper">
+                <!-- Left contact page -->
+                <form class="form-horizontal" role="form" action="https://formspree.io/f/xeqypzdd" method="POST">
+                    <!-- Added action attribute pointing to Formspree endpoint -->
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="name" placeholder="NAME" name="name" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" autocomplete="off" required>
+                        </div>
+                    </div>
+                    <textarea class="form-control" rows="10" placeholder="MESSAGE" name="message" autocomplete="off" required></textarea>
+                    <button class="send-button" id="submit" type="submit" value="SEND">
+                        <div class="alt-send-button">
+                            <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
+                        </div>
+                    </button>
+                </form>
+                <!-- Left contact page -->
+                <div class="direct-contact-container">
+                    <ul class="contact-list">
+                        <li class="list-item"><i class="fas fa-map-marker-alt fa-2x"><span class="contact-text place"><a href="https://earth.google.com/web/search/Bennett+University,+Greater+Noida,+Uttar+Pradesh/@28.45064516,77.58472879,226.74723183a,949.59171568d,35y,49.62177551h,60t,0r/data=CmsaQRI7CiUweDM5MGNiZjk0ZGViNmJjMzk6MHg3YmE2YmVkYzlhMmI1MzdmKhJCZW5uZXR0IFVuaXZlcnNpdHkYAiABIiYKJAkg_ed9Hjo0QBEg_ed9Hjo0wBk7AjBAVW9JQCE5AjBAVW9JwDoDCgEw" target="_blank" title="Click to view location">Greater Noida, U.P</a></span></i></li>
+                        <!-- Changed icon class to Font Awesome -->
+                        <li class="list-item"><i class="fas fa-phone fa-2x"><span class="contact-text phone"><a href="tel:+91-7004230852" title="Give us a call">+91-7004230852</a></span></i></li>
+                        <!-- Changed icon class to Font Awesome -->
+                        <li class="list-item"><i class="fas fa-envelope fa-2x"><span class="contact-text gmail"><a href="mailto:sentibot007@gmail.com" title="Send us an email">sentibot007@gmail.com</a></span></i></li>
+                        <!-- Changed icon class to Font Awesome -->
+                    </ul>
+                    <hr>
+                    <ul class="social-media-list">
+                        <li><a href="https://github.com/Aditya-0009/SentiBot" target="_blank" class="contact-icon"><i class="fab fa-github"></i></a></li>
+                        <li><a href="https://www.linkedin.com/posts/aditya-raj-007kj_sentibot-ai-virtualfriend-activity-7167976117423816704-SezL?utm_source=share&utm_medium=member_desktop" target="_blank" class="contact-icon"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="https://discord.gg/PQVrJaTjJJ" target="_blank" class="contact-icon"><i class="fab fa-discord"></i></a></li>
+                        <li><a href="https://www.instagram.com/_ig._.adi_" target="_blank" class="contact-icon"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                    <hr>
+                    <div class="copyright">&copy; ALL OF THE RIGHTS RESERVED TO SENTIBOT</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+  <script>
+    document.querySelector('#contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      e.target.elements.name.value = '';
+      e.target.elements.email.value = '';
+      e.target.elements.message.value = '';
+    });
+  </script>
+</body>
+</html>

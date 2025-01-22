@@ -1,0 +1,83 @@
+.conversations {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    
+}
+.conversation-box {
+    background-color: #edf2f7; /* Light blue background */
+    border: 1px solid #ccc;
+    border-radius: 6px; /* Decrease border-radius for a slightly less rounded appearance */
+    padding: 0.1em; /* Reduce padding to make the box smaller */
+    margin-bottom: 1em; /* Increase margin to make the boxes farther apart */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow for a lighter appearance */
+    transition: all 0.3s ease-in-out; /* Add transition for smooth scaling */
+    animation: slideIn 0.5s; /* Apply slide-in animation */
+    width: 70%; /* Reduce the width of the conversation box */
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%); /* Start off-screen to the left */
+    }
+    100% {
+        transform: translateX(0); /* Slide in to the screen */
+        opacity: 1; /* Fade in */
+    } 
+}
+
+/* Add zoom-in effect on hover */
+.conversation-box:hover {
+    transform: scale(1.02); /* Slightly increase scale on hover */
+}
+
+.conversation-header {
+    font-weight: bold;
+    font-size: 0.8em; /* Font size relative to conversation-box */
+    margin-bottom: 0.5em; /* Margin relative to conversation-box */
+    color: #007bff; /* Blue text color */
+    position: relative;
+}
+
+.conversation-header::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    position: absolute;
+    bottom: -0.5em; /* Distance from header relative to conversation-box */
+    left: 0;
+}
+
+.logo-convo {
+    width: 40px;
+    /* height: 1px; */
+    font-size: 0.2em ; /* Adjust the font size to decrease the size of the logo */
+    vertical-align: middle; /* Align the logo vertically with the text */
+}
+
+
+.input-text,
+.predicted-mood {
+    font-size: 1.0em; /* Font size relative to conversation-box */
+    color: #808080;
+    display: inline;
+    margin-top: 0.5em; /* Margin relative to conversation-box */
+}
+
+/* Set the color for positive mood */
+.predicted-mood .predicted-mood-text[data-mood="positive"] {
+    color: green;
+}
+
+/* Set the color for negative mood */
+.predicted-mood .predicted-mood-text[data-mood="negative"] {
+    color: red;
+}
+
+/* Set the color for neutral mood */
+.predicted-mood .predicted-mood-text[data-mood="neutral"] {
+    color: black;
+}

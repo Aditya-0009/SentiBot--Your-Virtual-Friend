@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentiBot</title>
+    <link rel="website icon" type="jpg" href="static\SentiBot_Logo.png">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"> <!-- Import Boxicons library -->
+    <link rel="stylesheet" href="static/styles.css"> <!-- Link to styles.css -->
+    <link rel="stylesheet" href="static/buttons.css"> <!-- Link to updated buttons.css -->
+    <link rel="stylesheet" href="static/convo.css"> <!-- Link to convo.css --> 
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet"> <!-- Added link to Oswald font -->
+    
+</head>    
+<body>
+    <div class="overlay"></div> <!-- New overlay div -->
+
+    <a href="home" class="home-link">
+        <i class='bx bx-home'></i>
+    </a>    
+    
+    <div class="logo-container">
+        <img src="static\SentiBot_Logo.png" alt="SentiBot Logo" class="logo">
+        <h1 id="senti-bot-title">
+            <span>SentiBot</span>
+            <span>-Your Virtual Friend</span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <!-- Left Section: Conversations -->
+        <div class="left-section">
+            <div class="conversations"></div>
+        </div> 
+ 
+        <!-- Right Section: Video Stream and Manual Text Input -->
+        <div class="right-section">
+            <!-- Video Stream -->
+            <div class="containHori">
+                <div class="video-container" id="videoContainer">
+                    <video id="videoElement" autoplay muted style="display: none;"></video>
+                    <!-- Embedded GIF -->
+                    <div id="gifContainer"> <!-- Remove inline style to display GIF container by default -->
+                        <img src="static/user_camera.gif" alt="GIF">
+                    </div>
+                </div>
+    
+                <div class="circular-container" id="botContainer">
+                    <img id="botGif" src="static/OnStart_bot.gif" alt="Bot GIF">
+                </div>                
+            </div>
+                   
+
+            <!-- Start/Stop Button -->
+            <div class="record-buttons">
+                <button style="--content: 'Start Recording';" id="recordButton" class="glow-on-hover" onclick="startRecording()">
+                    <div class="left"></div>
+                    Start Recording
+                    <div class="right"></div>
+                </button>
+                <button style="--content: 'Stop Recording'; display:none;" id="stopButton" class="glow-on-hover" onclick="stopRecording()">
+                    <div class="left"></div>
+                    Stop Recording
+                    <div class="right"></div>
+                </button>
+            </div>
+            <!-- Manual Text Input -->
+            <div class="manual-text-input">
+                <hr class="separator-line"> <!-- Separator line -->
+                <textarea id="textInput" placeholder="Type your text here..." rows="4" cols="30" onkeydown="handleKeyPress(event)"></textarea>
+            </div>
+
+            <!-- Process Text Button -->
+            <div class="process-text-button">
+                <button style="--content: 'Process Text';" id="processButton" class="glow-on-hover" onclick="processText()">
+                    <div class="left"></div>
+                    Process Text
+                    <div class="right"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let recognition;
+        let isRecording = false;
+        let conversationCount = 0;
+
+        window.onload = function() {
+            document.getElementById('videoElement').style.display = 'none';
+            document.getElementById('gifContainer').style.display = 'block';
+        };
+
+        function speakPredictedMoodMessage(predictedMood) {
+            const message = `Your mood seems to be ${predictedMood}.`;
+            const utterance = new SpeechSynthesisUtterance(message);
+            speechSynthesis.speak(utterance);
+        }
+
+
+        function startRecording() {
+            if (isRecording) return;
+            isRecording = true;
+
+            const recordButton = document.getElementById('recordButton');
+            const stopButton = document.getElementById('stopButton');
+            recordButton.style.display = 'none';
+            stopButton.style.display = 'inline-block';
+
+            // Show the video stream and hide the GIF
+            document.getElementById('videoElement').style.display = 'block';
+            document.getElementById('gifContainer').style.display = 'none';
+
+            // Show the input bot GIF in the bot container
+            const botGif = document.getElementById('botGif');
+            botGif.src = 'static/input_bot.gif';
+
+            conversationCount++; // Increment conversation count
+
+            const conversationsDiv = document.querySelector('.conversations');
+            const newConversation = document.createElement('div'); // Create new conversation box
+            newConversation.classList.add('conversation-box');
+            newConversation.innerHTML = `<div class="conversation-header">Conversation${conversationCount}</div><div class="conversation-content"></div>`;
+            conversationsDiv.appendChild(newConversation); // Append conversation box
+
+            const newContent = document.createElement('div'); // Create new content cell inside conversation box
+            newContent.classList.add('conversation-text');
+            newConversation.querySelector('.conversation-content').appendChild(newContent);
+
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                .then(function(stream) {
+                    const videoElement = document.getElementById('videoElement');
+                    videoElement.srcObject = stream;
+
+                    stream.getAudioTracks().forEach(track => {
+                        track.enabled = false;
+                    });
+
+                    recognition = new webkitSpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+
+                    recognition.onresult = function(event) {
+                        const transcript = Array.from(event.results)
+                            .map(result => result[0])
+                            .map(result => result.transcript)
+                            .join(' ');
+
+                        newContent.textContent = transcript;
+
+                        if (newContent.textContent.length > 5000) {
+                            newContent.textContent = newContent.textContent.substring(newContent.textContent.length - 5000);
+                        }
+                    };
+
+                    recognition.start();
+                })
+                .catch(function(err) {
+                    console.error('Error accessing video stream:', err);
+                });
+        }
+
+        function stopRecording() {
+            const recordButton = document.getElementById('recordButton');
+            const stopButton = document.getElementById('stopButton');
+            stopButton.disabled = true;
+            
+            setTimeout(() => {
+                stopButton.disabled = false;
+            }, 1000);
+
+            if (!isRecording) return;
+            isRecording = false;
+
+            recordButton.style.display = 'inline-block';
+            stopButton.style.display = 'none';
+
+            // Stop the speech recognition
+            recognition.stop();
+
+            // Stop the video stream and show the GIF
+            const videoContainer = document.getElementById('videoContainer');
+            const videoElement = document.getElementById('videoElement');
+            const gifContainer = document.getElementById('gifContainer');
+            
+            videoElement.style.display = 'none';
+            gifContainer.style.display = 'block';
+
+            const stream = videoElement.srcObject;
+            const tracks = stream.getTracks();
+            tracks.forEach(track => track.stop());
+
+            // Perform sentiment analysis prediction and display predicted mood
+            const conversationText = document.querySelector('.conversation-box:last-child .conversation-text').textContent;
+
+            if (!conversationText.trim()) {
+                alert('Enter your input to get Sentiment Prediction.');
+                return; // Exit the function if there's no input
+            }
+
+            fetch('/process_audio_video', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text_data: conversationText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const predictedMood = data.predicted_mood;
+                    const conversationsDiv = document.querySelector('.conversations');
+                    const newMood = document.createElement('div');
+                    newMood.classList.add('predicted-mood');
+                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo-convo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood}</span>.</p>`;
+                    const lastConversation = conversationsDiv.lastChild;
+                    lastConversation.querySelector('.conversation-content').appendChild(newMood);
+
+                    // Show the corresponding bot GIF based on the predicted mood
+                    const botGif = document.getElementById('botGif');
+                    switch(predictedMood.toLowerCase()) {
+                        case 'positive':
+                            botGif.src = 'static/positive_bot.gif';
+                            break;
+                        case 'neutral':
+                            botGif.src = 'static/neutral_bot.gif';
+                            break;
+                        case 'negative':
+                            botGif.src = 'static/negative_bot.gif';
+                            break;
+                        default:
+                            // Show the default bot GIF if mood is not recognized
+                            botGif.src = 'static/OnStart_bot.gif';
+                    }
+                    speakPredictedMoodMessage(predictedMood);
+                }
+            })
+            .catch(error => {
+                console.error('Error processing text:', error);
+            });
+        }
+
+
+        function processText() {
+            const textInput = document.getElementById('textInput').value.trim();
+
+            if (!textInput) {
+                alert('Enter your input to get Sentiment Prediction.');
+                return; // Exit the function if there's no input
+            }
+
+            const conversationsDiv = document.querySelector('.conversations');
+
+            const newConversation = document.createElement('div'); // Create new conversation box
+            newConversation.classList.add('conversation-box');
+            newConversation.innerHTML = `<div class="conversation-header">Conversation${++conversationCount}</div><div class="conversation-content"><div class="conversation-text">${textInput}</div></div>`;
+            conversationsDiv.appendChild(newConversation); // Append conversation box
+
+            // Clear the text input field
+            document.getElementById('textInput').value = '';
+
+            // Perform sentiment analysis prediction and display predicted mood
+            fetch('/process_audio_video', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text_data: textInput
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Inside processText() function
+                    const predictedMood = data.predicted_mood;
+                    const newMood = document.createElement('div');
+                    newMood.classList.add('predicted-mood');
+                    newMood.innerHTML = `<hr><p><img src="static/SentiBot_Logo.png" alt="SentiBot Logo" class="logo-convo"> Your mood seems to be <span class="predicted-mood-text" data-mood="${predictedMood.toLowerCase()}">${predictedMood}</span>.</p>`;
+                    const lastConversation = conversationsDiv.lastChild;
+                    lastConversation.querySelector('.conversation-content').appendChild(newMood);
+
+
+                    // Show the corresponding bot GIF based on the predicted mood
+                    const botGif = document.getElementById('botGif');
+                    switch(predictedMood.toLowerCase()) {
+                        case 'positive':
+                            botGif.src = 'static/positive_bot.gif';
+                            break;
+                        case 'neutral':
+                            botGif.src = 'static/neutral_bot.gif';
+                            break;
+                        case 'negative':
+                            botGif.src = 'static/negative_bot.gif';
+                            break;
+                        default:
+                            // Show the default bot GIF if mood is not recognized
+                            botGif.src = 'static/OnStart_bot.gif';
+                    }
+                    speakPredictedMoodMessage(predictedMood);
+                }
+            })
+            .catch(error => {
+                console.error('Error processing text:', error);
+            });
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                processText();
+            }
+        }
+
+
+    </script>
+</body>
+</html>

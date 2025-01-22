@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | SentiBot</title>
+  <link rel="stylesheet" type="text/css" href="static/about.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> <!-- Added link to Lato font -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;700&display=swap" rel="stylesheet"> <!-- Added link to Oswald font -->
+
+
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Marcellus", serif;
+        }
+
+        body {
+        background-color: #1e1e1e;
+        color: #fff;
+        }
+
+        header {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 13px;
+        }
+
+        nav ul {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        }
+
+        nav ul li {
+        margin-right: 20px;
+        }
+
+        nav ul li:last-child {
+        margin-right: 0;
+        }
+
+        nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        }
+
+        nav ul li a:hover {
+        color: #f0f0f0;
+        }
+
+        .logo-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #355973;
+        }
+
+        .logo {
+        width: 40px;
+        height: auto;
+        margin-right: 13px;
+        }
+
+        .logo-text {
+        font-size: 26px;
+        }
+
+        .about-section {
+        padding: 20px;
+        }
+
+        .black-container {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        text-align: center;
+        margin-top: 100px;
+        border-radius: 15px;
+        }
+
+        .features-section {
+        margin-top: 50px;
+        }
+
+        .features-section h2 {
+        color: #ffd277;
+        font-size: 24px;
+        margin-bottom: 20px;
+        }
+
+        .features-section ul {
+        list-style-type: none;
+        }
+
+        .features-section li {
+        margin-bottom: 10px;
+        }
+
+        .creators-section {
+        margin-top: 50px;
+        }
+
+        .creator-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        }
+
+        .creator {
+        text-align: center;
+        }
+
+        .creator img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+        }
+
+        .creator h3 {
+        color: #ffd277;
+        margin-bottom: 5px;
+        }
+
+        .creator p {
+        color: #b3b3b3;
+        }
+
+        .footer-distributed {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #2d2a30;
+        padding: 50px 50px 60px 50px;
+        text-align: left;
+        font: bold 16px sans-serif;
+        }
+
+        .footer-distributed .footer-left,
+        .footer-distributed .footer-center,
+        .footer-distributed .footer-right {
+        display: inline-block;
+        vertical-align: top;
+        }
+
+        .footer-distributed .footer-left {
+        width: 30%;
+        }
+
+        .footer-distributed h3 {
+        color: #ffffff;
+        font: normal 36px 'Cookie', cursive;
+        margin: 0;
+        }
+
+        .footer-distributed h3 span {
+        color: #e0ac1c;
+        }
+
+        .footer-distributed .footer-links {
+        color: #ffffff;
+        margin: 20px 0 12px;
+        }
+
+        .footer-distributed .footer-links a {
+        display: inline-block;
+        line-height: 1.8;
+        text-decoration: none;
+        color: inherit;
+        }
+
+        .footer-distributed .footer-company-name {
+        color: #8f9296;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+        }
+
+        .footer-distributed .footer-center {
+        width: 35%;
+        }
+
+        .footer-distributed .footer-center i {
+        background-color: #33383b;
+        color: #ffffff;
+        font-size: 25px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 42px;
+        margin: 10px 15px;
+        vertical-align: middle;
+        }
+
+        .footer-distributed .footer-center i.fa-envelope {
+        font-size: 17px;
+        line-height: 38px;
+        }
+
+        .footer-distributed .footer-center p {
+        display: inline-block;
+        color: #ffffff;
+        vertical-align: middle;
+        margin: 0;
+        }
+
+        .footer-distributed .footer-center p span {
+        display: block;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 2;
+        }
+
+        .footer-distributed .footer-center p a {
+        color: #e0ac1c;
+        text-decoration: none;
+        }
+
+        .footer-distributed .footer-right {
+        width: 30%;
+        }
+
+        .footer-distributed .footer-company-about {
+        line-height: 20px;
+        color: #92999f;
+        font-size: 13px;
+        font-weight: normal;
+        margin: 0;
+        }
+
+        .footer-distributed .footer-company-about span {
+        display: block;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        }
+
+        .footer-distributed .footer-icons {
+        margin-top: 25px;
+        }
+
+        .footer-distributed .footer-icons a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        background-color: #33383b;
+        border-radius: 2px;
+        font-size: 20px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 35px;
+        margin-right: 3px;
+        margin-bottom: 5px;
+        transition: all 0.3s linear;
+        }
+
+        .footer-distributed .footer-icons a:hover {
+        background-color: #e0ac1c;
+        }
+
+        @media screen and (max-width: 880px) {
+        .footer-distributed {
+            font: bold 14px sans-serif;
+        }
+
+        .footer-distributed .footer-left,
+        .footer-distributed .footer-center,
+        .footer-distributed .footer-right {
+            display: block;
+            width: 100%;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .footer-distributed .footer-center i {
+            margin-left: 0;
+        }
+        }
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="{{ url_for('home') }}" class="logo-link">
+            <img src="static\SentiBot_Logo.png" alt="SentiBot Logo" class="logo">
+            <span class="logo-text">SentiBot</span>
+          </a>          
+        </li>
+        <li><a href="{{ url_for('about') }}" class="btn-link"><i class='bx bx-info-circle'></i> About</a></li>
+        <li><a href="{{ url_for('contact') }}" class="btn-link"><i class='bx bx-envelope'></i> Contact Us</a></li>
+        <li><a href="{{ url_for('login') }}" class="btn-link"><i class='bx bx-log-out'></i> Log Out</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="about-section">
+    <div class="black-container">
+      <h1>About SentiBot</h1>
+      <p>SentiBot is a cutting-edge web application with the goal of revolutionizing user engagement via distinctive voice and video interactions. Through the smooth integration of speech-to-text and video processing technologies, this study presents a method for sentiment analysis. Users are able to translate their thoughts and feelings into text in real time while speaking. Simultaneously, the program examines video footage to improve understanding of users' facial emotions.</p>
+      <p>SentiBot's primary job is to provide real-time insights on the emotions that users have expressed. With the use of machine learning models, the program can identify a wide range of emotions, including happiness, sadness, rage, and more. This allows for individualized interactions based on the emotional states of the users. Through the application of real-time sentiment analysis, user engagement is given a new dimension that promotes responsive and sympathetic communication.</p>
+      <p>Looking ahead, SentiBot aims to elevate user experience by integrating generative AI capabilities. This forthcoming enhancement will empower the application to furnish adaptive and personalized responses rooted in users' expressed sentiments, offering a distinctive and empathetic interaction milieu.</p>
+      <p>In summary, SentiBot embodies a significant leap in sentiment analysis technology, proffering a user-centric avenue for communication. By leveraging voice and video interactions, the application furnishes a seamless and intuitive platform for users to articulate themselves and receive tailored feedback promptly.</p>
+    </div>
+
+    <div class="features-section">
+      <h2>SentiBot Features</h2>
+      <ul>
+        <li>Real-time sentiment analysis of text and video inputs</li>
+        <li>Identification of a wide range of emotions, including happiness, sadness, rage, and more</li>
+        <li>Individualized interactions based on users' emotional states</li>
+        <li>Responsive and sympathetic communication</li>
+        <li>Integration of generative AI capabilities for adaptive and personalized responses</li>
+      </ul>
+    </div>
+
+    <div class="creators-section">
+      <h2>Meet the Creators</h2>
+      <div class="creator-container">
+        <div class="creator">
+          <img src="static\creator1.jpg" alt="Creator 1">
+          <h3>John Doe</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="creator">
+          <img src="static\creator2.jpg" alt="Creator 2">
+          <h3>Jane Doe</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="creator">
+          <img src="static\creator3.jpg" alt="Creator 3">
+          <h3>Michael Smith</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+        <h3>Senti<span>Bot</span> </h3>
+
+        <p class="footer-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            |
+            <a href="{{ url_for('about') }}">About</a>
+            |
+            <a href="{{ url_for('contact') }}">Contact</a>
+        </p>
+
+        <p class="footer-company-name">Copyright © 2021 <strong>SentiBot</strong> All rights reserved</p>
+    </div>
+
+    <div class="footer-center">
+        <div>
+            <i class="fas fa-map-marker"></i>
+            <p>
+              <a href="https://earth.google.com/web/search/Bennett+University,+Greater+Noida,+Uttar+Pradesh/@28.45064516,77.58472879,226.74723183a,949.59171568d,35y,49.62177551h,60t,0r/data=CmsaQRI7CiUweDM5MGNiZjk0ZGViNmJjMzk6MHg3YmE2YmVkYzlhMmI1MzdmKhJCZW5uZXR0IFVuaXZlcnNpdHkYAiABIiYKJAkg_ed9Hjo0QBEg_ed9Hjo0wBk7AjBAVW9JQCE5AjBAVW9JwDoDCgEw">Greater Noida, Uttar Pradesh</a>
+            </p>
+        </div>
+
+        <div>
+            <i class="fas fa-phone"></i>
+            <p>+91 7004230852</p>
+        </div>
+        <div>
+            <i class="fas fa-envelope"></i>
+            <p><a href="mailto:sentibot007@gmail.com">sentibot007@gmail.com</a></p>
+        </div>
+    </div>
+    <div class="footer-right">
+        <p class="footer-company-about">
+            <span>About</span>
+            <strong>SentiBot</strong> is a cutting-edge web application with the goal of revolutionizing user engagement via distinctive voice and video interactions. Through the smooth integration of speech-to-text and video processing technologies, this study presents a method for sentiment analysis. Users are able to translate their thoughts and feelings into text in real time while speaking.
+        </p>
+        <div class="footer-icons">
+            <a href="https://github.com/Aditya-0009/SentiBot"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_ig._.adi_"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/posts/aditya-raj-88657a24b_sentibot-ai-virtualfriend-activity-7167976117423816704-OYZk?utm_source=share&utm_medium=member_desktop"><i class="fab fa-linkedin"></i></a>
+            <a href="https://discord.gg/PQVrJaTjJJ"><i class="fab fa-discord"></i></a>
+            <a href="https://www.youtube.com/channel/UCJ8O-HV7JiprpQVbuG51qSw"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+  </footer>
+
+</body>
+</html>
